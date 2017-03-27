@@ -5,7 +5,9 @@ app.set("view engine","ejs");
 app.set("views","./views");
 var server = require("http").Server(app);
 var io = require("socket.io")(server);
-server.listen(3000);
+app.listen(process.env.PORT || 3000, function(){
+  console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
+});
 
 var mangUserOnline = [];
 io.on("connection",function(socket){
